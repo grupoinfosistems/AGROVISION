@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chiaway - Insumos Agrícolas, Semillas y Tecnología para el Agro</title>
+  <link rel="stylesheet" href="agrovision-widget.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    /* Chiaway Topbar */
+    .topbar {
+      background-color: #064e3b;
+      color: #a7f3d0;
+      padding: 8px 32px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar a {
+      color: #ffffff;
+      text-decoration: underline;
+      margin-left: 8px;
+    }
+
+    /* Main Navigation */
+    .navbar {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #065f46;
+    }
+    .logo-badge {
+      background: #10b981;
+      color: #ffffff;
+      font-weight: 900;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+    .logo-text {
+      font-size: 24px;
+      font-weight: 800;
+      color: #047857;
+      letter-spacing: -0.5px;
+    }
+    .logo-sub {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 500;
+      display: block;
+      margin-top: -4px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #334155;
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #059669;
+    }
+    .nav-cta {
+      background-color: #059669;
+      color: #ffffff !important;
+      padding: 8px 16px;
+      border-radius: 6px;
+    }
+    .nav-cta:hover {
+      background-color: #047857 !important;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 60%, #047857 100%);
+      color: #ffffff;
+      padding: 64px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content {
+      max-width: 650px;
+      z-index: 2;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      color: #6ee7b7;
+    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 17px;
+      color: #d1fae5;
+      margin-bottom: 24px;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #f59e0b;
+      color: #0f172a;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .hero-btn:hover {
+      background-color: #d97706;
+      transform: translateY(-2px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+    .section-header {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .section-header h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .section-header p {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    /* Product Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+      border-color: #10b981;
+    }
+    .card-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      background: #ecfdf5;
+      color: #047857;
+      width: fit-content;
+    }
+    .card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .card-ingredient {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+    .card-dose {
+      font-size: 12px;
+      color: #334155;
+      background: #f1f5f9;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .card-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: #047857;
+    }
+    .card-btn {
+      background-color: #047857;
+      color: #ffffff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Integration Tutorial Box */
+    .embed-guide {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 60px;
+    }
+    .embed-guide h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    .code-block {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 18px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      margin: 16px 0;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      padding: 40px 32px;
+      margin-top: 80px;
+      text-align: center;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div>🌱 Despacho a todo el Perú: Ica, La Libertad, Lambayeque, Piura y Arequipa.</div>
+    <div>Atención técnica telefónica: <strong>+51 (01) 700-CHIA</strong></div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="#" class="logo-container">
+      <div class="logo-badge">CW</div>
+      <div>
+        <span class="logo-text">chiaway</span>
+        <span class="logo-sub">Insumos y Soluciones Agrícolas</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#catalogo">Fungicidas</a></li>
+      <li><a href="#catalogo">Insecticidas</a></li>
+      <li><a href="#catalogo">Acaricidas</a></li>
+      <li><a href="#catalogo">Bioinsumos</a></li>
+      <li><a href="javascript:void(0)" onclick="AgrovisionWidget.openModal()" class="nav-cta">🔬 Diagnóstico IA</a></li>
+    </ul>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Tecnología AgroVisión en Chiaway</span>
+      <h1>¿Hojas enfermas o plagas en tu cultivo?</h1>
+      <p>Sube una foto de tu planta y nuestra Inteligencia Artificial identificará el patógeno al instante, recomendando los productos autorizados disponibles en Chiaway.</p>
+      <button class="hero-btn" onclick="AgrovisionWidget.openModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+        Escanear mi Cultivo Ahora
+      </button>
+    </div>
+  </section>
+
+  <!-- Main Catalog -->
+  <main class="container" id="catalogo">
+    <div class="section-header">
+      <div>
+        <h2>Catálogo de Agroquímicos Destacados</h2>
+        <p>Productos con registro SENASA Perú y entrega inmediata.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div>
+          <span class="card-badge">Fungicida Sistémico</span>
+          <h3>Flint 50 WG</h3>
+          <div class="card-ingredient">Trifloxistrobina 50%</div>
+          <div class="card-dose">Dosis: 0.15 - 0.20 kg/ha</div>
+        </div>
+        <div class="card-bottom">
+          <span class="card-price">S/ 180.00</span>
+          <button class="card-btn" onclick="AgrovisionWidget.openModal()">Diagnosticar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <span class="card-badge">Fungicida Preventivo</span>
+          <h3>Kumulus DF</h3>
+          <div class="card-ingredient">Azufre micronizado 80%</div>
+          <div class="card-dose">Dosis: 2.0 - 4.0 kg/ha</div>
+        </div>
+        <div class="card-bottom">
+          <span class="card-price">S/ 45.00</span>
+          <button class="card-btn" onclick="AgrovisionWidget.openModal()">Diagnosticar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <span class="card-badge">Insecticida / Acaricida</span>
+          <h3>Movento 150 OD</h3>
+          <div class="card-ingredient">Spirotetramat 150 g/L</div>
+          <div class="card-dose">Dosis: 0.5 - 0.75 L/ha</div>
+        </div>
+        <div class="card-bottom">
+          <span class="card-price">S/ 260.00</span>
+          <button class="card-btn" onclick="AgrovisionWidget.openModal()">Diagnosticar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <span class="card-badge">Fungicida Translaminar</span>
+          <h3>Amistar Top</h3>
+          <div class="card-ingredient">Azoxistrobina + Difenoconazol</div>
+          <div class="card-dose">Dosis: 0.35 - 0.50 L/ha</div>
+        </div>
+        <div class="card-bottom">
+          <span class="card-price">S/ 210.00</span>
+          <button class="card-btn" onclick="AgrovisionWidget.openModal()">Diagnosticar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embedding snippet guide for Chiaway Devs -->
+    <div class="embed-guide">
+      <h3>🚀 Cómo Embeber este Widget en Chiaway.com (Producción)</h3>
+      <p>Para integrar el widget de AgroVisión en cualquier tienda o página web de Chiaway, simplemente agregue el archivo CSS y el script al final de su página antes del cierre de <code>&lt;/body&gt;</code>:</p>
+      
+      <div class="code-block">&lt;!-- 1. Estilos del Widget AgroVisión --&gt;
+&lt;link rel="stylesheet" href="https://cdn.chiaway.com/widgets/agrovision/agrovision-widget.css"&gt;
+
+&lt;!-- 2. Script del Widget con conexión a Spring Boot 3.3 --&gt;
+&lt;script src="https://cdn.chiaway.com/widgets/agrovision/agrovision-widget.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  AgrovisionWidget.init({
+    apiUrl: 'http://localhost:8080', // URL de su backend Spring Boot
+    buttonText: 'Diagnóstico de Cultivo AI'
+  });
+&lt;/script&gt;</div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Chiaway Perú S.A.C. - Potenciado por AgroVisión AI (Spring Boot 3.3 & MySQL)</p>
+  </footer>
+
+  <!-- AgroVisión Embedded Widget Integration -->
+  <script src="agrovision-widget.js"></script>
+  <script>
+    // Inicializar el widget conectado al backend Spring Boot en puerto 8080
+    AgrovisionWidget.init({
+      apiUrl: 'http://localhost:8080',
+      buttonText: 'Diagnóstico de Cultivo AI'
+    });
+  </script>
+</body>
+</html>

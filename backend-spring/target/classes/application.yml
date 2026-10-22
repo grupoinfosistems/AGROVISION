@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: agrovision-spring
+  datasource:
+    # URL de conexión MySQL (por defecto agrovision_db en localhost:3306)
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/agrovision_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:r1p6G12r04}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 30MB
+
+# Configuración propia de AgroVisión
+agrovision:
+  plantnet:
+    api-key: ${PLANTNET_API_KEY:2b10i2p4nn5qaQ1k1ElhO9hKp}
+    base-url: https://my-api.plantnet.org/v2
+  openai:
+    api-key: ${OPENAI_API_KEY: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}
+    vision-model: gpt-4o
+    agent-model: gpt-4o-mini
+  confidence-threshold: 0.70
+  uploads-dir: uploads
+  cors:
+    allowed-origins:
+      - "https://chiaway.com"
+      - "https://*.chiaway.com"
+      - "http://localhost:*"
+      - "http://127.0.0.1:*"
+      - "http://localhost:5173"
+      - "http://localhost:8080"
+      - "http://localhost:8085"

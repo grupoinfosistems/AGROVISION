@@ -1,0 +1,77 @@
+{
+  "groups": [
+    {
+      "name": "agrovision",
+      "type": "com.agrovision.config.AppProperties",
+      "sourceType": "com.agrovision.config.AppProperties"
+    },
+    {
+      "name": "agrovision.cors",
+      "type": "com.agrovision.config.AppProperties$Cors",
+      "sourceType": "com.agrovision.config.AppProperties",
+      "sourceMethod": "getCors()"
+    },
+    {
+      "name": "agrovision.openai",
+      "type": "com.agrovision.config.AppProperties$OpenAi",
+      "sourceType": "com.agrovision.config.AppProperties",
+      "sourceMethod": "getOpenai()"
+    },
+    {
+      "name": "agrovision.plantnet",
+      "type": "com.agrovision.config.AppProperties$PlantNet",
+      "sourceType": "com.agrovision.config.AppProperties",
+      "sourceMethod": "getPlantnet()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "agrovision.confidence-threshold",
+      "type": "java.lang.Double",
+      "sourceType": "com.agrovision.config.AppProperties",
+      "defaultValue": 0.7
+    },
+    {
+      "name": "agrovision.cors.allowed-origins",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.agrovision.config.AppProperties$Cors"
+    },
+    {
+      "name": "agrovision.openai.agent-model",
+      "type": "java.lang.String",
+      "sourceType": "com.agrovision.config.AppProperties$OpenAi",
+      "defaultValue": "gpt-4o-mini"
+    },
+    {
+      "name": "agrovision.openai.api-key",
+      "type": "java.lang.String",
+      "sourceType": "com.agrovision.config.AppProperties$OpenAi",
+      "defaultValue": ""
+    },
+    {
+      "name": "agrovision.openai.vision-model",
+      "type": "java.lang.String",
+      "sourceType": "com.agrovision.config.AppProperties$OpenAi",
+      "defaultValue": "gpt-4o"
+    },
+    {
+      "name": "agrovision.plantnet.api-key",
+      "type": "java.lang.String",
+      "sourceType": "com.agrovision.config.AppProperties$PlantNet",
+      "defaultValue": ""
+    },
+    {
+      "name": "agrovision.plantnet.base-url",
+      "type": "java.lang.String",
+      "sourceType": "com.agrovision.config.AppProperties$PlantNet",
+      "defaultValue": "https:\/\/my-api.plantnet.org\/v2"
+    },
+    {
+      "name": "agrovision.uploads-dir",
+      "type": "java.lang.String",
+      "sourceType": "com.agrovision.config.AppProperties",
+      "defaultValue": "uploads"
+    }
+  ],
+  "hints": []
+}
